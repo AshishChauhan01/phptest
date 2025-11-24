@@ -18,8 +18,8 @@
             <div class="container">
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="add-data.php">Add</a></li>
-                    <li><a href="">Update</a></li>
+                    <li><a href="add.php">Add</a></li>
+                    <li><a href="update.php">Update</a></li>
                     <li><a href="">Delete</a></li>
                 </ul>
             </div>

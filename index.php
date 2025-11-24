@@ -6,6 +6,12 @@ LEFT JOIN cities as c ON st.city = c.c_id
 LEFT JOIN states as s ON st.state = s.s_id";
 $result = mysqli_query($conn, $query);
 
+if (isset($_GET['update_success']) && $_GET['update_success'] == 1) {
+    echo "<div class='alert alert-success'>Data updated successfully</div>";
+}
+if (isset($_GET['delete_success']) && $_GET['delete_success'] == 1) {
+    echo "<div class='alert alert-success'>Data deleted successfully</div>";
+}
 ?>
 <section class="main-content">
     <div class="container">
@@ -37,8 +43,8 @@ $result = mysqli_query($conn, $query);
                             <td><?php echo $data['state_name']; ?></td>
                             <td><?php echo $data['address']; ?></td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-warning">Edit</a>
-                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="edit.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="delete.php?id=<?php echo $data['id']; ?> " class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                             </td>
                         </tr>
                     <?php } ?>

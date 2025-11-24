@@ -6,30 +6,39 @@ $cities_data = mysqli_query($conn, $city_query);
 $state_query = "SELECT * FROM states";
 $states_data = mysqli_query($conn, $state_query);
 if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $class = $_POST['class'];
-    $phone = $_POST['phone'];
-    $city = $_POST['city'];
-    $state = $_POST['state'];
-    $address = $_POST['address'];
+    // $name = $_POST['name'];
+    // $class = $_POST['class'];
+    // $phone = $_POST['phone'];
+    // $city = $_POST['city'];
+    // $state = $_POST['state'];
+    // $address = $_POST['address'];
 
-    // Escape all input (PREVENT SQL INJECTION)
-    $name = mysqli_real_escape_string($conn, $name);
-    $class = mysqli_real_escape_string($conn, $class);
-    $phone = mysqli_real_escape_string($conn, $phone);
-    $city = mysqli_real_escape_string($conn, $city);
-    $state = mysqli_real_escape_string($conn, $state);
-    $address = mysqli_real_escape_string($conn, $address);
+    // // Escape all input (PREVENT SQL INJECTION)
+    // $name = mysqli_real_escape_string($conn, $name);
+    // $class = mysqli_real_escape_string($conn, $class);
+    // $phone = mysqli_real_escape_string($conn, $phone);
+    // $city = mysqli_real_escape_string($conn, $city);
+    // $state = mysqli_real_escape_string($conn, $state);
+    // $address = mysqli_real_escape_string($conn, $address);
 
+    $fields = ["name", "class", "phone", "city", "state", "address"];
+    foreach ($fields as $field) {
+        $$field = mysqli_real_escape_string($conn, $_POST[$field]);
+    }
     $query = "INSERT INTO students(`name`, `class`, `phone`, `city`, `state`, `address`) VALUES ('$name', '$class', '$phone', '$city', '$state', '$address')";
     $result = mysqli_query($conn, $query);
     if ($result) {
         header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
-        exit();
     } else {
         header("Location: " . $_SERVER['PHP_SELF'] . "?error=1");
-        exit();
     }
+    exit();
+}
+if (isset($_GET["success"]) && $_GET['success'] == 1) {
+    echo "<div class='alert alert-success'>Data successfully inserted</div>";
+}
+if (isset($_GET["error"]) && $_GET['error'] == 1) {
+    echo "<div class='alert alert-danger'>Data not inserted &nbsp;</div>" . mysqli_error($conn);
 }
 ?>
 <div class="main-content">
