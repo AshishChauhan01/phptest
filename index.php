@@ -44,7 +44,7 @@ if (isset($_GET['delete_success']) && $_GET['delete_success'] == 1) {
                             <td><?php echo $data['address']; ?></td>
                             <td>
                                 <a href="edit.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
-                                <a href="delete.php?id=<?php echo $data['id']; ?> " class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                <a href="delete_query.php?id=<?php echo $data['id']; ?> " class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                             </td>
                         </tr>
                     <?php } ?>

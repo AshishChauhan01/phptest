@@ -42,7 +42,8 @@ header nav ul li a:hover {
   margin-top: 24px;
 }
 
-form {
+form,
+.show-details {
   background-color: #f5f5f5;
   padding: 20px;
   border-radius: 12px;
