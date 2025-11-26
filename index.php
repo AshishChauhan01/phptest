@@ -1,5 +1,5 @@
-<?php
-include('header.php'); ?>
+<?php include('header.php'); ?>
+
 <?php
 $query = "SELECT * FROM students as st 
 LEFT JOIN cities as c ON st.city = c.c_id 
@@ -44,7 +44,7 @@ if (isset($_GET['delete_success']) && $_GET['delete_success'] == 1) {
                             <td><?php echo $data['address']; ?></td>
                             <td>
                                 <a href="edit.php?id=<?php echo $data['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
-                                <a href="delete_query.php?id=<?php echo $data['id']; ?> " class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                <a href="delete_query.php?id=<?php echo $data['id']; ?>&from=index" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                             </td>
                         </tr>
                     <?php } ?>

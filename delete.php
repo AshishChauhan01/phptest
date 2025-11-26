@@ -8,6 +8,9 @@ $results = mysqli_query($conn, $query);
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <?php if (isset($_GET['delete_success']) && $_GET['delete_success'] == 1) {
+                    echo "<div class='alert alert-success'>Record removed successfully.</div>";
+                } ?>
                 <h2 class="fs-3">Update Record</h2>
                 <?php if (mysqli_num_rows($results)) { ?>
                     <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="POST">
@@ -31,7 +34,7 @@ $results = mysqli_query($conn, $query);
                 <?php } else { ?>
                     <p class="fs-4 text-muted">*Records not found.</p>
                 <?php } ?>
-                <?php if (isset($_POST['show_record'])) { ?>
+                <?php if (isset($_POST['show_record']) && isset($_POST['custom_id'])) { ?>
                     <?php
                     $record_id = $_POST['custom_id'];
                     $query = $query . " WHERE id =  '$record_id' ";
@@ -39,7 +42,7 @@ $results = mysqli_query($conn, $query);
                     $record = mysqli_fetch_assoc($fetch_record);
                     ?>
                     <div class="text-end mt-4">
-                        <a href="delete_query.php?id=<?= $record_id; ?>" class="btn btn-danger btn-sm">Delete Record</a>
+                        <a href="delete_query.php?id=<?= $record_id; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete Record</a>
                     </div>
                     <div class="show-details mt-2">
                         <div class="row">
